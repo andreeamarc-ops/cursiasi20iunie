@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>Cheltuieli Nordica 2026</title>
+<style>
+  body { font-family: sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+  h1 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+  p.sub { color: #666; font-size: 0.85rem; margin-top: 0; }
+  /* Bar chart */
+  .chart { margin: 1.5rem 0; }
+  .bar-row { display: flex; align-items: center; margin: 5px 0; }
+  .bar-label { width: 100px; font-size: 0.85rem; text-align: right; padding-right: 10px; }
+  .bar { height: 22px; background: #4a90d9; border-radius: 3px; min-width: 2px; transition: width 0.3s; }
+  .bar-val { font-size: 0.8rem; padding-left: 8px; color: #444; }
+  /* Table */
+  input#search { padding: 6px 10px; width: 260px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px; font-size: 0.9rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  th { background: #f0f4f8; cursor: pointer; user-select: none; padding: 7px 10px; text-align: left; border-bottom: 2px solid #ccc; }
+  th:hover { background: #dce8f5; }
+  td { padding: 6px 10px; border-bottom: 1px solid #eee; }
+  tr:hover td { background: #f7fbff; }
+  .sum { font-weight: bold; }
+  .badge { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 0.75rem; background: #e8f0fe; color: #1a56d6; }
+</style>
+</head>
+<body>
+<h1>Cheltuieli Nordica — ian–aug 2026</h1>
+<p class="sub">Sursă: cheltuieli-2026.csv &nbsp;|&nbsp; 56 tranzacții &nbsp;|&nbsp; Total: 893.710 lei</p>
+
+<div class="chart" id="chart"></div>
+
+<hr style="margin:1.5rem 0">
+<input type="text" id="search" placeholder="Caută (categorie, furnizor, descriere…)">
+<table id="tbl">
+  <thead>
+    <tr>
+      <th onclick="sortBy(0)">Data ↕</th>
+      <th onclick="sortBy(1)">Categorie ↕</th>
+      <th onclick="sortBy(2)">Furnizor ↕</th>
+      <th onclick="sortBy(3)">Descriere ↕</th>
+      <th onclick="sortBy(4)" style="text-align:right">Sumă (lei) ↕</th>
+    </tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+
+<script>
+const data = [
+  ["2026-01-08","Software","CloudHost RO","Hosting si infrastructura ianuarie",1450],
+  ["2026-01-12","Marketing","ReclamePro","Campanie FB/IG ianuarie",8500],
+  ["2026-01-15","Salarii","Nordica","State de plata ianuarie",98000],
+  ["2026-01-20","Birou","Papetaria Centrala","Consumabile si papetarie",620],
+  ["2026-01-22","Software","Monitor.io","Abonament monitorizare aplicatie",890],
+  ["2026-01-28","Servicii","Contabis SRL","Servicii contabilitate ianuarie",1800],
+  ["2026-02-05","Software","CloudHost RO","Hosting si infrastructura februarie",1450],
+  ["2026-02-10","Marketing","Studio Vizual","Materiale promotionale si grafica",6200],
+  ["2026-02-14","Salarii","Nordica","State de plata februarie",98000],
+  ["2026-02-18","Deplasari","CFR Calatori","Bilete tren intalnire client Bucuresti",480],
+  ["2026-02-19","Deplasari","Hotel Continental","Cazare deplasare Bucuresti",420],
+  ["2026-02-25","Servicii","Contabis SRL","Servicii contabilitate februarie",1800],
+  ["2026-02-27","Birou","CleanOffice","Servicii curatenie februarie",750],
+  ["2026-03-04","Software","CloudHost RO","Hosting si infrastructura martie",1500],
+  ["2026-03-09","Marketing","InfluentMedia","Colaborare cont saloane Instagram",4800],
+  ["2026-03-14","Salarii","Nordica","State de plata martie",99500],
+  ["2026-03-16","Software","DesignTools","Abonament unelte design",540],
+  ["2026-03-21","Servicii","Contabis SRL","Servicii contabilitate martie",1800],
+  ["2026-03-24","Birou","Papetaria Centrala","Consumabile birou",310],
+  ["2026-03-30","Deplasari","Autogara Vest","Transport conferinta locala",150],
+  ["2026-04-06","Software","CloudHost RO","Hosting si infrastructura aprilie",1500],
+  ["2026-04-11","Marketing","ReclamePro","Campanie FB/IG aprilie",7300],
+  ["2026-04-15","Salarii","Nordica","State de plata aprilie",99500],
+  ["2026-04-17","Software","Monitor.io","Abonament monitorizare aplicatie",890],
+  ["2026-04-22","Servicii","Contabis SRL","Servicii contabilitate aprilie",1800],
+  ["2026-04-26","Birou","CleanOffice","Servicii curatenie aprilie",750],
+  ["2026-04-29","Birou","Cafea & Co","Cafea si apa birou",280],
+  ["2026-05-05","Software","CloudHost RO","Hosting si infrastructura mai",1550],
+  ["2026-05-12","Marketing","Studio Vizual","Productie video demo v2.0",5140],
+  ["2026-05-15","Salarii","Nordica","State de plata mai",101000],
+  ["2026-05-19","Software","TestLab","Mediu de test plati v2.0",1200],
+  ["2026-05-23","Servicii","Contabis SRL","Servicii contabilitate mai",1800],
+  ["2026-05-28","Deplasari","CFR Calatori","Bilete tren training echipa",520],
+  ["2026-06-03","Software","CloudHost RO","Hosting si infrastructura iunie",1550],
+  ["2026-06-10","Marketing","ReclamePro","Campanie pre-lansare FB/IG iunie",9600],
+  ["2026-06-13","Salarii","Nordica","State de plata iunie",101000],
+  ["2026-06-17","Software","Monitor.io","Abonament monitorizare aplicatie",890],
+  ["2026-06-20","Birou","Papetaria Centrala","Consumabile birou",400],
+  ["2026-06-25","Servicii","Contabis SRL","Servicii contabilitate iunie",1800],
+  ["2026-06-27","Birou","CleanOffice","Servicii curatenie iunie",750],
+  ["2026-07-06","Software","CloudHost RO","Hosting si infrastructura iulie",1600],
+  ["2026-07-11","Marketing","InfluentMedia","Colaborare influenceri lansare",4200],
+  ["2026-07-15","Salarii","Nordica","State de plata iulie",101000],
+  ["2026-07-18","Software","DesignTools","Abonament unelte design",540],
+  ["2026-07-22","Servicii","Contabis SRL","Servicii contabilitate iulie",1800],
+  ["2026-07-24","Deplasari","Hotel Continental","Cazare intalnire parteneri",460],
+  ["2026-07-29","Birou","Cafea & Co","Cafea si apa birou",300],
+  ["2026-08-05","Software","CloudHost RO","Hosting si infrastructura august",1600],
+  ["2026-08-12","Marketing","ReclamePro","Campanie anunt v2.0 august",6600],
+  ["2026-08-14","Salarii","Nordica","State de plata august",102500],
+  ["2026-08-19","Software","Monitor.io","Abonament monitorizare aplicatie",890],
+  ["2026-08-21","Software","TestLab","Mediu de test plati v2.0",1200],
+  ["2026-08-26","Servicii","Contabis SRL","Servicii contabilitate august",1800],
+  ["2026-08-28","Birou","CleanOffice","Servicii curatenie august",750],
+  ["2026-08-31","Birou","Papetaria Centrala","Consumabile birou",290]
+];
+
+const totals = {};
+data.forEach(r => { totals[r[1]] = (totals[r[1]]||0) + r[4]; });
+const maxVal = Math.max(...Object.values(totals));
+const chartEl = document.getElementById('chart');
+Object.entries(totals).sort((a,b)=>b[1]-a[1]).forEach(([cat, val]) => {
+  const pct = (val / maxVal * 400).toFixed(0);
+  chartEl.innerHTML += `<div class="bar-row">
+    <div class="bar-label">${cat}</div>
+    <div class="bar" style="width:${pct}px"></div>
+    <div class="bar-val">${val.toLocaleString('ro-RO')} lei</div>
+  </div>`;
+});
+
+let sortCol = 0, sortAsc = true;
+function fmt(v) { return typeof v === 'number' ? v.toLocaleString('ro-RO') : v; }
+
+function render(rows) {
+  document.getElementById('tbody').innerHTML = rows.map(r =>
+    `<tr><td>${r[0]}</td><td><span class="badge">${r[1]}</span></td><td>${r[2]}</td><td>${r[3]}</td><td style="text-align:right" class="sum">${fmt(r[4])}</td></tr>`
+  ).join('');
+}
+
+function filtered() {
+  const q = document.getElementById('search').value.toLowerCase();
+  return data.filter(r => r.some(v => String(v).toLowerCase().includes(q)));
+}
+
+function sortBy(col) {
+  if (sortCol === col) sortAsc = !sortAsc; else { sortCol = col; sortAsc = true; }
+  const rows = filtered().sort((a,b) => {
+    const x = a[col], y = b[col];
+    return sortAsc ? (x < y ? -1 : x > y ? 1 : 0) : (x > y ? -1 : x < y ? 1 : 0);
+  });
+  render(rows);
+}
+
+document.getElementById('search').addEventListener('input', () => render(filtered()));
+render(data);
+</script>
+</body>
+</html>
