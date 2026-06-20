@@ -1,0 +1,56 @@
+data,categorie,furnizor,descriere,suma_lei
+2026-01-08,Software,CloudHost RO,Hosting si infrastructura ianuarie,1450
+2026-01-12,Marketing,ReclamePro,Campanie FB/IG ianuarie,8500
+2026-01-15,Salarii,Nordica,State de plata ianuarie,98000
+2026-01-20,Birou,Papetaria Centrala,Consumabile si papetarie,620
+2026-01-22,Software,Monitor.io,Abonament monitorizare aplicatie,890
+2026-01-28,Servicii,Contabis SRL,Servicii contabilitate ianuarie,1800
+2026-02-05,Software,CloudHost RO,Hosting si infrastructura februarie,1450
+2026-02-10,Marketing,Studio Vizual,Materiale promotionale si grafica,6200
+2026-02-14,Salarii,Nordica,State de plata februarie,98000
+2026-02-18,Deplasari,CFR Calatori,Bilete tren intalnire client Bucuresti,480
+2026-02-19,Deplasari,Hotel Continental,Cazare deplasare Bucuresti,420
+2026-02-25,Servicii,Contabis SRL,Servicii contabilitate februarie,1800
+2026-02-27,Birou,CleanOffice,Servicii curatenie februarie,750
+2026-03-04,Software,CloudHost RO,Hosting si infrastructura martie,1500
+2026-03-09,Marketing,InfluentMedia,Colaborare cont saloane Instagram,4800
+2026-03-14,Salarii,Nordica,State de plata martie,99500
+2026-03-16,Software,DesignTools,Abonament unelte design,540
+2026-03-21,Servicii,Contabis SRL,Servicii contabilitate martie,1800
+2026-03-24,Birou,Papetaria Centrala,Consumabile birou,310
+2026-03-30,Deplasari,Autogara Vest,Transport conferinta locala,150
+2026-04-06,Software,CloudHost RO,Hosting si infrastructura aprilie,1500
+2026-04-11,Marketing,ReclamePro,Campanie FB/IG aprilie,7300
+2026-04-15,Salarii,Nordica,State de plata aprilie,99500
+2026-04-17,Software,Monitor.io,Abonament monitorizare aplicatie,890
+2026-04-22,Servicii,Contabis SRL,Servicii contabilitate aprilie,1800
+2026-04-26,Birou,CleanOffice,Servicii curatenie aprilie,750
+2026-04-29,Birou,Cafea & Co,Cafea si apa birou,280
+2026-05-05,Software,CloudHost RO,Hosting si infrastructura mai,1550
+2026-05-12,Marketing,Studio Vizual,Productie video demo v2.0,5140
+2026-05-15,Salarii,Nordica,State de plata mai,101000
+2026-05-19,Software,TestLab,Mediu de test plati v2.0,1200
+2026-05-23,Servicii,Contabis SRL,Servicii contabilitate mai,1800
+2026-05-28,Deplasari,CFR Calatori,Bilete tren training echipa,520
+2026-06-03,Software,CloudHost RO,Hosting si infrastructura iunie,1550
+2026-06-10,Marketing,ReclamePro,Campanie pre-lansare FB/IG iunie,9600
+2026-06-13,Salarii,Nordica,State de plata iunie,101000
+2026-06-17,Software,Monitor.io,Abonament monitorizare aplicatie,890
+2026-06-20,Birou,Papetaria Centrala,Consumabile birou,400
+2026-06-25,Servicii,Contabis SRL,Servicii contabilitate iunie,1800
+2026-06-27,Birou,CleanOffice,Servicii curatenie iunie,750
+2026-07-06,Software,CloudHost RO,Hosting si infrastructura iulie,1600
+2026-07-11,Marketing,InfluentMedia,Colaborare influenceri lansare,4200
+2026-07-15,Salarii,Nordica,State de plata iulie,101000
+2026-07-18,Software,DesignTools,Abonament unelte design,540
+2026-07-22,Servicii,Contabis SRL,Servicii contabilitate iulie,1800
+2026-07-24,Deplasari,Hotel Continental,Cazare intalnire parteneri,460
+2026-07-29,Birou,Cafea & Co,Cafea si apa birou,300
+2026-08-05,Software,CloudHost RO,Hosting si infrastructura august,1600
+2026-08-12,Marketing,ReclamePro,Campanie anunt v2.0 august,6600
+2026-08-14,Salarii,Nordica,State de plata august,102500
+2026-08-19,Software,Monitor.io,Abonament monitorizare aplicatie,890
+2026-08-21,Software,TestLab,Mediu de test plati v2.0,1200
+2026-08-26,Servicii,Contabis SRL,Servicii contabilitate august,1800
+2026-08-28,Birou,CleanOffice,Servicii curatenie august,750
+2026-08-31,Birou,Papetaria Centrala,Consumabile birou,290
